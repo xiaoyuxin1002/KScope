@@ -1,6 +1,6 @@
-# KScope: A Framework for Characterizing the Knowledge Status of Language Models
+# KScope: A Framework for Characterizing the Knowledge Status of Language Models [NeurIPS 2025]
 
-In this paper, we propose a taxonomy of five knowledge statuses and introduce KScope, a hierarchical testing framework to characterize LLM knowledge status.  
+In this <a href="https://arxiv.org/abs/2506.07458">paper</a>, we propose a taxonomy of five knowledge statuses and introduce KScope, a hierarchical testing framework to characterize LLM knowledge status.  
 We apply KScope to nine LLMs across four datasets and investigate three questions: 
 1. How does context update LLMs' knowledge status?
 2. What context features drive the desired knowledge update?
@@ -33,3 +33,13 @@ We apply KScope to nine LLMs across four datasets and investigate three question
 6. Context Augmentation Strategies (Q3):
    - Run ```7-GPT.ipynb``` to collect GPT-4o responses.
    - Run ```8-Augmentation.ipynb``` to evaluate the effectiveness of different augmentation strategies.
+
+### Citation
+```
+@inproceedings{xiao2025kscope,
+  title={KScope: A Framework for Characterizing the Knowledge Status of Language Models},
+  author={Xiao, Yuxin and Chen, Shan and Gallifant, Jack and Bitterman, Danielle and Hartvigsen, Thomas and Ghassemi, Marzyeh},
+  booktitle={NeurIPS},
+  year={2025}
+}
+```
