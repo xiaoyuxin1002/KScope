@@ -21,12 +21,20 @@ instruction_doc = {
 instruction = 'First, explain your reasoning briefly step-by-step based on the provided information.\nThen, select the most appropriate option and present your response in the required format.'
 response = 'Provide your response in the following format:\n<answer>Option [number]</answer>'
 
+# For the open-ended setting:
+# instruction_doc = {
+#     True: 'You are given some documents and a question.\nBased on the document, provide the most appropriate answer.',
+#     False: 'Without relying on any external document, provide the most appropriate answer to the question.'
+# }
+# instruction = 'First, explain your reasoning briefly step-by-step based on the provided information.\nThen, provide your answer in the required format.'
+# response = 'Provide your answer in the following format:\n<answer> YOUR ANSWER </answer>'
+
 def get_message(args, row, qid, if_doc=False):
     prompt = [system[args.dataset]]
     prompt += ['### Instruction:\n' + instruction_doc[if_doc] + instruction]
-    if if_doc: prompt += ['### Documents:\n' + row[f'evidence']]
+    if if_doc: prompt += ['### Documents:\n' + row[f'evidence']] # For noisy context: 'retrieved'
     prompt += ['### Question:\n' + row[f'question {qid}']]
-    prompt += ['### Choices:\n' + '\n'.join([f'Option {i}: {row[f"option {i}"]}' for i in range(1, 4)])]
+    prompt += ['### Choices:\n' + '\n'.join([f'Option {i}: {row[f"option {i}"]}' for i in range(1, 4)])] # For the open-ended setting: remove this line
     prompt += [response]
     message = [{'role':'user', 'content':'\n\n'.join(prompt)}]
     return message
@@ -41,7 +49,7 @@ def main():
     parser.add_argument('--num_gpus', type=int, default=1)
     args = parser.parse_args()
     warnings.filterwarnings("ignore")
-    myprint(f'Evaluate {model2abbre[args.model]} on {args.dataset}')
+    myprint(f'Evaluate {args.model} on {args.dataset}')
 
     max_len, seed = 4096, 0
     llm = LLM(model=args.model, max_seq_len_to_capture=max_len, seed=seed, 

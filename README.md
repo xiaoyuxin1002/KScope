@@ -11,10 +11,25 @@ We apply KScope to nine LLMs across four datasets and investigate three question
 
 <hr style="border: none; height: 1px; solid #eaecef;" />
 
-We recommend the following workflow:
-1. Dataset Preparation: Run ```1-Preparation.ipynb``` to prepare the four evaluation datasets.
-2. Hyperparameter Search: Run ```2-Hyperparameter.ipynb``` to determine the number of question paraphrases and sample responses needed for consistent characterization of LLM knowledge status.
-3. Model Response: Run ```response.sh``` to collect the responses of the nine LLMs across the four datasets.
-4. Knowledge Status Characterization (Q1): Run ```status.sh``` to apply KScope to the collected model responses, and ```3-Status.ipynb``` to investigate context-induced shifts in LLM knowledge status.
-5. Feature Importance Analysis (Q2): Run ```uncertainty.sh``` to compute models' perplexity and entropy, ```4-Feature.ipynb``` to compute the other features, and ```5-Analysis.ipynb``` to analyze the results.
-6. Context Augmentation Strategies (Q3): Run ```6-GPT.ipynb``` to collect GPT-4o's responses, and ```7-Augmentation.ipynb``` to evaluate the effectiveness of different augmentation strategies.
+### Recommended Workflow
+
+1. Dataset Preparation:
+   - Run ```1-Preparation.ipynb``` to prepare the four evaluation datasets.
+2. Hyperparameter Search:
+   - Run ```2-Hyperparameter.ipynb``` to determine the number of question paraphrases and sample responses required for consistent characterization of LLM knowledge status.
+3. Model Response Collection:
+   - Run ```response.sh``` to collect responses from the nine LLMs on the four datasets in the multi-choice setting with gold context.
+   - To test with noisy context, replace "evidence" with "retrieved" in ```response.py```.
+   - To switch to the open-ended setting, use the provided commented instruction prompts in ```response.py```.
+4. Knowledge Status Characterization (Q1):
+   - Apply KScope to the collected responses to characterize LLM knowledge status:
+   - Run ```status.sh``` for the multi-choice setting (with either gold or noisy context).
+   - Run ```status_open.sh``` for the open-ended setting (with gold context).
+   - Use ```3-Status.ipynb``` and ```4-Settings.ipynb``` to further explore and visualize context-induced shifts in knowledge status.
+5. Feature Importance Analysis (Q2):
+   - Run ```uncertainty.sh``` to compute perplexity and entropy.
+   - Run ```5-Feature.ipynb``` to compute additional features.
+   - Run ```6-Analysis.ipynb``` to analyze feature importance.
+6. Context Augmentation Strategies (Q3):
+   - Run ```7-GPT.ipynb``` to collect GPT-4o responses.
+   - Run ```8-Augmentation.ipynb``` to evaluate the effectiveness of different augmentation strategies.
